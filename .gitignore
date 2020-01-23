@@ -1,0 +1,12 @@
+
+.idea/$CACHE_FILE$
+
+.idea/.gitignore
+.idea/codeStyles/
+.idea/compiler.xml
+.idea/google-java-format.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+ktvx.iml
+target/
+.idea/vcs.xml
