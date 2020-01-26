@@ -37,6 +37,7 @@
   </dependencies>
 
   <build>
+    <sourceDirectory>${project.basedir}/src/main/kt</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
@@ -49,6 +50,12 @@
             <goals>
               <goal>compile</goal>
             </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/main/kt</sourceDir>
+                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+              </sourceDirs>
+            </configuration>
           </execution>
           <execution>
             <id>test-compile</id>
@@ -61,6 +68,30 @@
         <configuration>
           <jvmTarget>11</jvmTarget>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>core.AppKt</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -1,6 +1,7 @@
 package core
 
 import io.vertx.core.AbstractVerticle
+import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
 
@@ -10,11 +11,11 @@ class HttpServerVerticle : AbstractVerticle() {
         val server = vertx.createHttpServer();
         val router = Router.router(vertx)
 
-        router.route().path("/:name").handler(make)
+        router.route().path("/:name").method(HttpMethod.GET).handler(::make)
         server.requestHandler(router).listen(9999)
     }
 
-    val make: (RoutingContext) -> Unit = { context ->
+    private fun make(context: RoutingContext): Unit {
         var resp = context.response()
         var name = context.request().getParam("name")
         resp.putHeader("Content-type", "text/plain; charset=utf-8")
